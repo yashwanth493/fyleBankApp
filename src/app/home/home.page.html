@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Bank Info App
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Choose a State capital</ion-label>
+      <ion-select interface="popover" placeholder="Select a State capital" (ionChange)="capitalChanged($event)">
+        <ion-select-option value="BANGLORE">Bangalore</ion-select-option>
+        <ion-select-option value="CHENNAI">Chennai</ion-select-option>
+        <ion-select-option value="MUMBAI">Mumbai</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()" color="primary" value="Ionic" animated
+    placeholder="Search Bank details">
+  </ion-searchbar>
+
+  <ion-card *ngFor="let bank of items">
+    <ion-card-header color="primary">
+      <ion-card-title style="font-size: 15px;">
+        <ion-icon name="tv" style="font-size: 15px;"></ion-icon> {{bank.bank_name}}
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <h3>
+        <ion-icon name="locate" style="font-size: 10px;"></ion-icon> {{bank.branch}},{{bank.city}}, {{bank.state}}
+      </h3>
+      <h4>
+        <ion-icon name="keypad" style="font-size: 10px;"></ion-icon>{{bank.ifsc}}
+      </h4>
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>
+
+<ion-footer *ngIf="showLoading">
+  <ion-spinner name="dots" color="primary"></ion-spinner>
+</ion-footer>
+<ion-footer *ngIf="askToSelect">
+  <ion-toolbar>
+    <h5 style="text-align: center;">Please select one state capital to continue...</h5>
+  </ion-toolbar>
+</ion-footer>
